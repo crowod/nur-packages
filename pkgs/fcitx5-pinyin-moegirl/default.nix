@@ -8,7 +8,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/outloudvi/mw2fcitx/releases/download/20230814/moegirl.dict";
-    sha256 = "sha256-0m6f3rg7rcgfhf4y8zyw40j3qy7pvzknf08kc73mw4266j98niii";
+    sha256 = "sha256-m7bmyvdgUrBR+1uCRmWDc5LAiVbrnqc//Hl4iNbTkGk=";
   };
 
   dontUnpack = true;
