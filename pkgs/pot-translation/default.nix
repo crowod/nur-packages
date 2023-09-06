@@ -18,6 +18,12 @@
 		libayatana-appindicator
   ];
   
+  commandLineArgs = [
+    "--enable-features=UseOzonePlatform" 
+    "--ozone-platform=wayland" 
+    "--enable-wayland-ime"
+  ];
+  
 in 
   stdenv.mkDerivation rec {
     pname = "pot-translation";
@@ -50,8 +56,7 @@ in
       makeWrapper $out/opt/pot $out/bin/pot \
         --argv0 "pot" \
         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libraries}" \
-        --prefix GDK_BACKEND : "x11"
-
+        --add-flags "${lib.escapeShellArgs commandLineArgs}"
     '';
   
     meta = with lib; {
