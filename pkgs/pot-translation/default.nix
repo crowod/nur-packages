@@ -48,13 +48,10 @@ in
       mkdir -p $out/share
       cp -r usr/share/* $out/share/
 
-      mkdir -p $out/opt
-      cp usr/bin/pot $out/opt/
-
       mkdir -p $out/bin
+      cp usr/bin/pot $out/bin/pot
 
-      makeWrapper $out/opt/pot $out/bin/pot \
-        --argv0 "pot" \
+      wrapProgram $out/bin/pot \
         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libraries}" \
         --prefix GDK_BACKEND : "x11" \
         --add-flags "${lib.escapeShellArgs commandLineArgs}"
