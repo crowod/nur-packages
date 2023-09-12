@@ -3,34 +3,11 @@
   lib,
   fetchurl,
   pkgs,
+  imagemagick,
   ...
 }:
 
 let 
-  libraries = with pkgs; [
-      alsa-lib
-      at-spi2-atk
-      cairo
-      cups.lib
-      dbus.lib
-      glib
-      gtk3
-      libxkbcommon
-      mesa
-      nspr
-      nss_latest
-      pango
-      xorg.libX11
-      xorg.libXcomposite
-      xorg.libXdamage
-      xorg.libXfixes
-      xorg.libXrandr
-      xorg.libxcb
-      xorg_sys_opengl
-      xorg.xrandr
-      xdg-utils
-  ];
-
   aliyunpan-unwrapped = stdenv.mkDerivation rec {
     pname = "aliyunpan-unwrapped";
     version = "v3.11.24";
@@ -44,25 +21,24 @@ let
       ar x ${src}
       tar xf data.tar.xz
     '';
+
+    nativeBuildInputs = [ imagemagick ];
     
-    nativeBuildInputs = libraries;
-  
     dontFixup = true;
   
-    buildInputs = with pkgs; [ 
-      autoPatchelfHook 
-      makeWrapper 
-    ];
-    
     installPhase = ''
       mkdir -p $out/share $out/bin $out/opt
   
       cp -r usr/share/* $out/share
   
-      sed -i "s|Exec=.*|Exec=xbyyunpan|" $out/share/applications/*.desktop
-      sed -i "s|Name=.*|Name=xbyyunpan|" $out/share/applications/*.desktop
+      sed -i "s|Exec=.*|Exec=xbyyunpan|; \$a Keywords=xbyyunpan" $out/share/applications/*.desktop
   
       cp -r opt/* $out/opt
+
+      for size in 16 24 32 48 64 128 256 512; do
+        mkdir -p $out/share/icons/hicolor/"$size"x"$size"/apps
+        convert -background none -resize "$size"x"$size" $out/share/icons/hicolor/0x0/apps/xbyyunpan.png $out/share/icons/hicolor/"$size"x"$size"/apps/xbyyunpan.png
+      done
     '';
   
   };
