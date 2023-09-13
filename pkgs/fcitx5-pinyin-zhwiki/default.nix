@@ -13,7 +13,7 @@ stdenv.mkDerivation {
 
   dontUnpack = true;
   installPhase = ''
-    install -Dm644 $src $out/.local/share/fcitx5/pinyin/dictionaries/zhwiki.dict
+    install -Dm644 $src $out/share/fcitx5/pinyin/dictionaries/zhwiki.dict
   '';
   meta = with lib; {
     description = "Fcitx 5 Pinyin Dictionary from zh.wikipedia.org";

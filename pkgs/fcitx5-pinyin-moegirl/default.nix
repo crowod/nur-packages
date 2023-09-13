@@ -13,7 +13,7 @@ stdenv.mkDerivation {
 
   dontUnpack = true;
   installPhase = ''
-    install -Dm644 $src $out/.local/share/fcitx5/pinyin/dictionaries/moegirl.dict
+    install -Dm644 $src $out/share/fcitx5/pinyin/dictionaries/moegirl.dict
   '';
   meta = with lib; {
     description = "Fcitx 5 pinyin dictionary generator for MediaWiki instances";
