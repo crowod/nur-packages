@@ -1,31 +1,30 @@
-{
-  stdenv,
-  lib,
-  fetchurl,
-  pkgs,
-  imagemagick,
-  ...
+{ stdenv
+, lib
+, fetchurl
+, pkgs
+, imagemagick
+, ...
 }:
 
-let 
+let
   aliyunpan-unwrapped = stdenv.mkDerivation rec {
     pname = "aliyunpan-unwrapped";
     version = "v3.11.24";
-  
+
     src = fetchurl {
       url = "https://github.com/gaozhangmin/aliyunpan/releases/download/v3.11.24/XBYDriver-3.11.24-linux-amd64.deb";
       sha256 = "sha256-Z2o+WbTtMYKj8WVVd/xREXjpO81z5e3Lh1FdZX6Eudc=";
     };
-  
+
     unpackPhase = ''
       ar x ${src}
       tar xf data.tar.xz
     '';
 
     nativeBuildInputs = [ imagemagick ];
-    
+
     dontFixup = true;
-  
+
     installPhase = ''
       mkdir -p $out/share $out/bin $out/opt
   
@@ -40,10 +39,10 @@ let
         convert -background none -resize "$size"x"$size" $out/share/icons/hicolor/0x0/apps/xbyyunpan.png $out/share/icons/hicolor/"$size"x"$size"/apps/xbyyunpan.png
       done
     '';
-  
+
   };
   base = pkgs.appimageTools.defaultFhsEnvArgs;
-  fhs = pkgs.buildFHSEnvBubblewrap (base// {
+  fhs = pkgs.buildFHSEnvBubblewrap (base // {
     name = "xbyyunpan";
     runScript = "${aliyunpan-unwrapped}/opt/小白羊云盘/xbyyunpan";
 
@@ -55,19 +54,19 @@ let
     unshareCgroup = false;
   });
 in
-  stdenv.mkDerivation {
-    pname = "aliyunpan";
-    inherit (aliyunpan-unwrapped) version;
-    phases = ["installPhase"];
-    installPhase = ''
-      mkdir -p $out/bin 
-      ln -s "${fhs}/bin/xbyyunpan" "$out/bin/xbyyunpan"
-      ln -s "${aliyunpan-unwrapped}/share" "$out/"
-    '';
+stdenv.mkDerivation {
+  pname = "aliyunpan";
+  inherit (aliyunpan-unwrapped) version;
+  phases = [ "installPhase" ];
+  installPhase = ''
+    mkdir -p $out/bin 
+    ln -s "${fhs}/bin/xbyyunpan" "$out/bin/xbyyunpan"
+    ln -s "${aliyunpan-unwrapped}/share" "$out/"
+  '';
 
-    meta = with lib; {
-      description = "小白羊网盘 - Powered by 阿里云盘";
-      homepage = "https://github.com/gaozhangmin/aliyunpan";
-      license = licenses.mit;
-    };
-  }
+  meta = with lib; {
+    description = "小白羊网盘 - Powered by 阿里云盘";
+    homepage = "https://github.com/gaozhangmin/aliyunpan";
+    license = licenses.mit;
+  };
+}
