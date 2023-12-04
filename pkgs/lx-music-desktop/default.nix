@@ -22,10 +22,10 @@
 }:
 stdenv.mkDerivation rec {
   pname = "lx-music-desktop";
-  version = "2.4.1";
+  version = "2.5.0";
   src = fetchurl {
-    url = "https://github.com/lyswhut/lx-music-desktop/releases/download/v2.4.1/lx-music-desktop-v2.4.1-x64.deb";
-    sha256 = "sha256-cRMZQZiG/VLIDVzPSxXdVCR9Gd6DOWIWVt5BZP/5jZA=";
+    url = "https://github.com/lyswhut/lx-music-desktop/releases/download/v2.5.0/lx-music-desktop_2.5.0_amd64.deb";
+    sha256 = "sha256-HX1tVlUzukc0EstevMXCrF/EjmsJTwNTxfmplPcWTmI=";
   };
 
   libraries = [
