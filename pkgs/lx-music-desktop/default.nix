@@ -18,6 +18,7 @@
 , libxkbcommon
 , pango
 , xorg
+, wrapGAppsHook
 , ...
 }:
 stdenv.mkDerivation rec {
@@ -56,6 +57,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     makeWrapper
+    wrapGAppsHook
     autoPatchelfHook
   ];
   buildInputs = libraries;
