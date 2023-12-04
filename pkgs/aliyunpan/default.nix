@@ -9,11 +9,11 @@
 let
   aliyunpan-unwrapped = stdenv.mkDerivation rec {
     pname = "aliyunpan-unwrapped";
-    version = "v3.11.24";
+    version = "v3.12.2";
 
     src = fetchurl {
-      url = "https://github.com/gaozhangmin/aliyunpan/releases/download/v3.11.24/XBYDriver-3.11.24-linux-amd64.deb";
-      sha256 = "sha256-Z2o+WbTtMYKj8WVVd/xREXjpO81z5e3Lh1FdZX6Eudc=";
+      url = "https://github.com/gaozhangmin/aliyunpan/releases/download/v3.12.2/XBYDriver-3.12.2-linux-amd64.deb";
+      sha256 = "sha256-AWy4rgKZP2FAYaUZXNvDH8ElVGTRn0wSkn12lZUj8eM=";
     };
 
     unpackPhase = ''
