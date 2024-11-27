@@ -12,8 +12,8 @@ let
     version = "v3.12.2";
 
     src = fetchurl {
-      url = "https://github.com/gaozhangmin/aliyunpan/releases/download/v3.12.2/XBYDriver-3.12.2-linux-amd64.deb";
-      sha256 = "sha256-AWy4rgKZP2FAYaUZXNvDH8ElVGTRn0wSkn12lZUj8eM=";
+      url = "https://github.com/gaozhangmin/aliyunpan/releases/download/v3.13.5/XBYDriver-3.13.5-linux-amd64.deb";
+      sha256 = "sha256-WdxGW1nRSZIieNs4p4oRQJIbN7MSrn8xZAr5nCYdfjo=";
     };
 
     unpackPhase = ''
